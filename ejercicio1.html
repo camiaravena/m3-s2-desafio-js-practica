@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Escríbe aquí tu código
+        let formulario = document.getElementById("formulario");
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault();
+                     
+            let nombre = document.querySelector("#nombre").value;
+            let asunto = document.querySelector("#asunto").value;
+            let mensaje = document.querySelector("#mensaje").value;
+
+            let regex = /[a-záéíóúñ\s]/img;
+
+            let validacion = true;
+
+            // Validacion para campo nombre
+            if(!regex.test(nombre)){
+                document.querySelector(".errorNombre").innerHTML = "El nombre es requerido.";
+                validacion = false;
+            }else{
+                document.querySelector(".errorNombre").innerHTML = "";
+            }
+            
+            // Validacion para campo asunto
+            if(!regex.test(asunto)){
+                document.querySelector(".errorAsunto").innerHTML = "El asunto es requerido.";
+                validacion = false;
+            }else{
+                document.querySelector(".errorAsunto").innerHTML = "";
+            }
+
+            // Validacion para campo mensaje
+            if(!regex.test(mensaje)){
+                document.querySelector(".errorMensaje").innerHTML = "El mensaje es requerido.";
+                validacion = false;
+            }else{
+                document.querySelector(".errorMensaje").innerHTML = "";
+            }
+
+            // Resultado para una correcta validacion
+            if(validacion){
+                document.querySelector(".resultado").innerHTML = "Mensaje enviado con éxito !!!"; 
+                event.target.reset();          
+            }else{
+                document.querySelector(".resultado").innerHTML = "";
+            }           
+
+        });
+        
+        </script>
+</body>
+
+</html>
